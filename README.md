@@ -1,6 +1,6 @@
 # My Neovim configuration
 
-This is my personal setup for Neovim
+This is my personal setup for Neovim. I am slowly moving over my older Vim config into a lua config.
 
 # Based On
 
