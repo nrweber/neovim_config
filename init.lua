@@ -116,16 +116,7 @@ require('lazy').setup({
     },
   },
 
-  {
-    -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
-    opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
-    },
-  },
+  { 'lukas-reineke/indent-blankline.nvim', main = "ibl", opts = {}, },
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
@@ -168,7 +159,7 @@ require('lazy').setup({
 vim.wo.number = true
 
 --// Turn on Relative numbering
-vim.wo.relativenumber = ture
+vim.wo.relativenumber = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
@@ -383,11 +374,13 @@ local on_attach = function(_, bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
+
+-- This is the list of lsp that will be installed on boot if they are not there
 local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  -- rust_analyzer = {},
+  rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
@@ -428,7 +421,7 @@ local lspconfig = require('lspconfig')
 lspconfig.csharp_ls.setup({
     root_dir = function(startpath)
         return lspconfig.util.root_pattern("*.sln")(startpath)
-           or lspconfig.util.root_pattern("*.csproj")(startpath)
+            or lspconfig.util.root_pattern("*.csproj")(startpath)
             or lspconfig.util.root_pattern("*.fsproj")(startpath)
             or lspconfig.util.root_pattern(".git")(startpath)
     end,
